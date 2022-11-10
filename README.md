@@ -1,2 +1,2 @@
-# ULPGCMuseumLocal
- github repository on local ULPGC
+# ULPGC Museum
+
