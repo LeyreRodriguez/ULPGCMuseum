@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ULPGC Museum</string>
+    <string name="navigation_open">Nav open</string>
+    <string name="navigation_close">Nav close</string>
+    <string name="title_activity_comments">CommentsActivity</string>
+    <string name="toolbar_ajustes">Ajustes</string>
+
 </resources>

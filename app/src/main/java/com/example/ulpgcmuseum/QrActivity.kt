@@ -105,4 +105,6 @@ class QrActivity : AppCompatActivity() {
 
 
 
+
+
 }
