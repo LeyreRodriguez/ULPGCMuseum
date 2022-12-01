@@ -15,7 +15,35 @@
         android:theme="@style/Theme.ULPGCMuseum"
         tools:targetApi="31">
         <activity
-            android:name=".QrActivit"
+            android:name=".Activity.InteractionsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.NinetyActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.SeventyActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.ItemActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.EightyActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -29,7 +57,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".InventoryActivity"
+            android:name=".Activity.InventoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

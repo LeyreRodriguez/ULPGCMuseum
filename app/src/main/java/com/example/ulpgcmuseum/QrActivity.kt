@@ -1,10 +1,14 @@
 package com.example.ulpgcmuseum
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -22,13 +26,15 @@ class QrActivity : AppCompatActivity() {
         setContentView(R.layout.activity_qr)
 
         setUpPermissions()
-        codeScanner()
+        codeScanner()   //Todo: when scanned code vibrate??
+        numberCode()
     }
 
     private fun codeScanner(){
 
         val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
         val scannerText = findViewById<TextView>(R.id.scan_text)
+        val qrScanner = findViewById<Button>(R.id.qr_scan_button)
 
         codeScanner = CodeScanner(this, scannerView)
 
@@ -52,15 +58,36 @@ class QrActivity : AppCompatActivity() {
                     Log.e("Qr", "Error al inicializar la camara: ${it.message}")
                 }
             }
+
+
+            //si pones el scanCodeMode en continuos esto no es necesario.
+            //para que cada vez que clickes se escanee el qr
+            scannerView.setOnClickListener{
+                codeScanner.startPreview()
+            }
+
+            qrScanner.setOnClickListener{
+                codeScanner.startPreview()
+            }
+
+            scannerText.setOnClickListener {
+                goToLink(scannerText.text.toString())
+            }
+
         }
 
-        //si pones el scanCodeMode en continuos esto no es necesario.
-        //para que cada vez que clickes se escanee el qr
-        scannerView.setOnClickListener{
-            codeScanner.startPreview()
-        }
+    }
 
 
+    private fun numberCode(){
+        val numberCode = findViewById<EditText>(R.id.qr_number_code)
+        //get int from char code
+
+    }
+
+    private fun goToLink(link: String) {
+        val url =  Uri.parse(link)
+        startActivity(Intent(Intent.ACTION_VIEW, url))
     }
 
     override fun onResume() {

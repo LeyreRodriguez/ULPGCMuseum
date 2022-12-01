@@ -23,7 +23,28 @@
         android:layout_below="@id/scanner_view"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:textColor="@color/black"
         android:text="Scan something..."
+        />
+
+    <Button
+        android:id="@+id/qr_scan_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan"
+        android:layout_below="@id/scanner_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"/>
+
+    <EditText
+        android:id="@+id/qr_number_code"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/qr_scan_button"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Inserte Código"
+        android:inputType="number"
         />
 
 </RelativeLayout>

@@ -1,29 +1,50 @@
-package com.example.ulpgcmuseum
+package com.example.ulpgcmuseum.Activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatDelegate.*
-import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.ulpgcmuseum.Activity.InteractionsActivity
-import com.example.ulpgcmuseum.Activity.InventoryActivity
-import com.example.ulpgcmuseum.Activity.NinetyActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.ulpgcmuseum.*
+import com.example.ulpgcmuseum.Adapter.MostVisitedAdapter
+import com.example.ulpgcmuseum.R
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.firestore.*
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-private lateinit var drawerLayout: DrawerLayout
+class InteractionsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var drawerLayout: DrawerLayout
+
+
+    @SuppressLint("WrongViewCast", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        setContentView(R.layout.activity_interactions)
+
+        val accept = findViewById<AppCompatButton>(R.id.accept)
+        accept.setOnClickListener {
+            val interactionsActivity = Intent (this, InteractionsActivity::class.java)
+            startActivity(interactionsActivity)
+        }
+        val cancel = findViewById<AppCompatButton>(R.id.cancel)
+        cancel.setOnClickListener {
+            val returnBack = Intent (this, MainActivity::class.java)
+            startActivity(returnBack)
+        }
+
+
 
         drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
@@ -41,16 +62,13 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener (this)
 
-        val interactions=findViewById<Button>(R.id.suggestions)
-        interactions.setOnClickListener {
-            val interactionsActivity = Intent(this, InteractionsActivity::class.java)
-            startActivity(interactionsActivity)
-        }
-
 
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+
+
+     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
             R.id.inicio -> {
@@ -74,7 +92,10 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 val intent : Intent = Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
-
+            R.id.ajustes -> {
+                val ajustesActivity = Intent (this, SettingsActivity::class.java)
+                startActivity(ajustesActivity)
+            }
 
         }
 
@@ -88,6 +109,21 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         } else{
             super.onBackPressed()
         }
+
+    }
+
+
+
+    fun onItemClick(item: Item, position: Int) {
+        //  Toast.makeText(this, item.Name, Toast.LENGTH_LONG).show()
+
+        val intent = Intent(this, ItemActivity::class.java)
+        intent.putExtra("Name", item.Name)
+        intent.putExtra("Year", item.Year)
+        intent.putExtra("Image", item.Image)
+        intent.putExtra("Description", item.Description)
+        startActivity(intent)
+
 
     }
 
