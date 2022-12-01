@@ -1,32 +1,61 @@
-package com.example.ulpgcmuseum
+package com.example.ulpgcmuseum.Activity
 
+import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Intent
-import android.content.res.Configuration
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.Switch
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.*
-import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.ulpgcmuseum.Activity.InteractionsActivity
-import com.example.ulpgcmuseum.Activity.InventoryActivity
-import com.example.ulpgcmuseum.Activity.NinetyActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.ulpgcmuseum.*
+import com.example.ulpgcmuseum.Adapter.MostVisitedAdapter
+import com.example.ulpgcmuseum.R
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.*
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-private lateinit var drawerLayout: DrawerLayout
+class InteractionsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var db : FirebaseFirestore
+
+
+    @SuppressLint("WrongViewCast", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        setContentView(R.layout.activity_interactions)
+
+        val accept = findViewById<AppCompatButton>(R.id.accept)
+        val name = findViewById<TextInputEditText>(R.id.name)
+        val comment = findViewById<TextInputEditText>(R.id.comment)
+
+        db = FirebaseFirestore.getInstance()
+        accept.setOnClickListener {
+            // Add a new document with a generated ID
+            db.collection("Comments")
+                .document(Math.random().toString()).set(hashMapOf("Name" to name.text.toString(),
+                "Comment" to comment.text.toString()))
+            name.setText("")
+            comment.setText("")
+        }
+        val cancel = findViewById<AppCompatButton>(R.id.cancel)
+        cancel.setOnClickListener {
+            val returnBack = Intent (this, MainActivity::class.java)
+            startActivity(returnBack)
+        }
+
+
 
         drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
@@ -44,32 +73,12 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener (this)
 
-        val interactions=findViewById<Button>(R.id.suggestions)
-        interactions.setOnClickListener {
-            val interactionsActivity = Intent(this, InteractionsActivity::class.java)
-            startActivity(interactionsActivity)
-        }
-
-        // Declare the switch from the layout file
-        val btn = findViewById<Switch>(R.id.darkMode)
-
-        // set the switch to listen on checked change
-        btn.setOnCheckedChangeListener { _, isChecked ->
-
-            // if the button is checked, i.e., towards the right or enabled
-            // enable dark mode, change the text to disable dark mode
-            // else keep the switch text to enable dark mode
-            if (btn.isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                btn.text = "Disable dark mode"
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                btn.text = "Enable dark mode"
-            }
-        }
-
 
     }
+
+
+
+
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
@@ -86,11 +95,9 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             R.id.qr -> {
                 val qrActivity = Intent (this, QrActivity::class.java)
                 startActivity(qrActivity)
-
-
             }
+            */
 
-             */
             R.id.comentarios -> {
                 val interactions = Intent (this, InteractionsActivity::class.java)
                 startActivity(interactions)
@@ -100,7 +107,10 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 val intent : Intent = Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
-
+            R.id.ajustes -> {
+                val ajustesActivity = Intent (this, SettingsActivity::class.java)
+                startActivity(ajustesActivity)
+            }
 
         }
 
@@ -114,6 +124,21 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         } else{
             super.onBackPressed()
         }
+
+    }
+
+
+
+    fun onItemClick(item: Item, position: Int) {
+        //  Toast.makeText(this, item.Name, Toast.LENGTH_LONG).show()
+
+        val intent = Intent(this, ItemActivity::class.java)
+        intent.putExtra("Name", item.Name)
+        intent.putExtra("Year", item.Year)
+        intent.putExtra("Image", item.Image)
+        intent.putExtra("Description", item.Description)
+        startActivity(intent)
+
 
     }
 

@@ -10,7 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        //to make the qr camera work
+
         maven { url 'https://jitpack.io' }
     }
 }
