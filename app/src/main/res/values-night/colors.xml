@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="DarkJungleGreen">#000000</color>
+    <color name="TealBlue">#192B33</color>
+    <color name="BlizzardBlue">#9ceaef</color>
+    <color name="BlackShadows">#bfacb5</color>
+    <color name="MistyRose">#e5d0cc</color>
+    <color name = "white">#ffffff</color>
+</resources>
