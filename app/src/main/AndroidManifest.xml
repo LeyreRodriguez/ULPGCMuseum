@@ -21,13 +21,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-            <intent-filte>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="example.com" android:schema="http"/>
-                <data android:host="example.com" android:schema="https"/>
-            </intent-filte>
         </activity>
 
         <activity
