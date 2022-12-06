@@ -63,6 +63,7 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 btn.text = "Disable dark mode"
             } else {
+
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 btn.text = "Enable dark mode"
             }
@@ -82,15 +83,10 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 val inventoryActivity = Intent (this, InventoryActivity::class.java)
                 startActivity(inventoryActivity)
             }
-            /*
             R.id.qr -> {
                 val qrActivity = Intent (this, QrActivity::class.java)
                 startActivity(qrActivity)
-
-
             }
-
-             */
             R.id.comentarios -> {
                 val interactions = Intent (this, InteractionsActivity::class.java)
                 startActivity(interactions)

@@ -6,4 +6,4 @@ data class Item(
     var Year : Int ?= 0,
     var Image : String ?= "",
     var mostVisited : Int ?= 0
-)
+) : java.io.Serializable

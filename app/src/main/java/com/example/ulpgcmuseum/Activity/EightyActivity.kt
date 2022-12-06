@@ -21,7 +21,7 @@ import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class EightyActivity : AppCompatActivity() , EightyAdapter.onItemClickListener,  NavigationView.OnNavigationItemSelectedListener  {
+class EightyActivity : AppCompatActivity() ,  NavigationView.OnNavigationItemSelectedListener  {
     private lateinit var recyclerView: RecyclerView
     private lateinit var eightyArrayList : ArrayList<Item>
 
@@ -64,17 +64,13 @@ class EightyActivity : AppCompatActivity() , EightyAdapter.onItemClickListener, 
 
 
 
-        myAdapter = EightyAdapter(eightyArrayList,this)
+        myAdapter = EightyAdapter(eightyArrayList)
 
 
 
         recyclerView.adapter = myAdapter
 
-        myAdapter.setOnItemClickListener(object : EightyAdapter.onItemClickListener {
-            override fun onItemClick(item: Item, position: Int) {
-                TODO("Not yet implemented")
-            }
-        })
+
 
         EventChangeListener()
     }
@@ -83,31 +79,43 @@ class EightyActivity : AppCompatActivity() , EightyAdapter.onItemClickListener, 
         when (item.itemId) {
             R.id.inicio -> {
                 val mainActivity = Intent (this, MainActivity::class.java)
+                finish()
                 startActivity(mainActivity)
+
             }
             R.id.inventory -> {
                 val inventoryActivity = Intent (this, InventoryActivity::class.java)
+                finish()
                 startActivity(inventoryActivity)
+
             }
 
             R.id.qr -> {
                 val qrActivity = Intent (this, QrActivity::class.java)
+                finish()
                 startActivity(qrActivity)
+
             }
 
 
             R.id.comentarios -> {
                 val interactions = Intent (this, InteractionsActivity::class.java)
+                finish()
                 startActivity(interactions)
+
             }
             R.id.noticias -> {
                 val uri : Uri = Uri.parse("https://www.ulpgc.es/");
                 val intent : Intent = Intent(Intent.ACTION_VIEW, uri);
+                finish()
                 startActivity(intent);
+
             }
             R.id.ajustes -> {
                 val ajustesActivity = Intent (this, SettingsActivity::class.java)
+                finish()
                 startActivity(ajustesActivity)
+
             }
 
         }
@@ -151,16 +159,4 @@ class EightyActivity : AppCompatActivity() , EightyAdapter.onItemClickListener, 
 
     }
 
-    override fun onItemClick(item: Item, position: Int) {
-        //  Toast.makeText(this, item.Name, Toast.LENGTH_LONG).show()
-
-        val intent = Intent(this, ItemActivity::class.java)
-        intent.putExtra("Name", item.Name)
-        intent.putExtra("Year", item.Year)
-        intent.putExtra("Image", item.Image)
-        intent.putExtra("Description", item.Description)
-        startActivity(intent)
-
-
-    }
 }

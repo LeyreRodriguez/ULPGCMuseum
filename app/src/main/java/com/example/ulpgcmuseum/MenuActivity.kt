@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageButton
 
 import android.widget.TextView
+import com.example.ulpgcmuseum.Activity.InventoryActivity
 
 class MenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

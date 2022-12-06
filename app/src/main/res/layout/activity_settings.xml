@@ -40,17 +40,17 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/language"
-                android:layout_width="145dp"
-                android:layout_height="78dp"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="132dp"
-                android:layout_marginTop="148dp"
-                android:layout_marginEnd="132dp"
-                android:layout_marginBottom="500dp"
-                android:background="@drawable/radius_button"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="456dp"
+                android:layout_marginEnd="35dp"
+                android:layout_marginBottom="211dp"
+                android:background="@drawable/border"
                 android:text="Language"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -61,17 +61,20 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/colorBlind"
-                android:layout_width="145dp"
-                android:layout_height="78dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="134dp"
-                android:layout_marginTop="378dp"
-                android:layout_marginEnd="132dp"
-                android:layout_marginBottom="275dp"
-                android:background="@drawable/radius_button"
+
+                android:layout_marginStart="33dp"
+
+                android:layout_marginTop="339dp"
+
+                android:layout_marginEnd="34dp"
+                android:layout_marginBottom="325dp"
+                android:background="@drawable/border"
                 android:text="Color blind Mode"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -82,17 +85,17 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/suggestions"
-                android:layout_width="145dp"
-                android:layout_height="78dp"
+                android:layout_width="338dp"
+                android:layout_height="70dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="132dp"
-                android:layout_marginTop="266dp"
-                android:layout_marginEnd="132dp"
-                android:layout_marginBottom="387dp"
-                android:background="@drawable/radius_button"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="234dp"
+                android:layout_marginEnd="34dp"
+                android:layout_marginBottom="433dp"
+                android:background="@drawable/border"
                 android:text="Suggestions"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,13 +104,20 @@
 
             <Switch
                 android:id="@+id/darkMode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="343dp"
+                android:layout_height="70dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="168dp"
-                android:layout_marginBottom="186dp"
-                android:text="DarkMode" />
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="117dp"
+                android:layout_marginEnd="34dp"
+                android:layout_marginBottom="544dp"
+                android:background="@drawable/border"
+                android:padding="10dp"
+                android:text="DarkMode"
+                android:textAlignment="center"/>
 
         </RelativeLayout>
 

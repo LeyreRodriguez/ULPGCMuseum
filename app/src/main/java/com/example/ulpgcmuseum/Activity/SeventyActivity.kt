@@ -22,7 +22,7 @@ import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class SeventyActivity : AppCompatActivity() , SeventyAdapter.onItemClickListener,  NavigationView.OnNavigationItemSelectedListener {
+class SeventyActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var seventyArrayList : ArrayList<Item>
     private lateinit var drawerLayout: DrawerLayout
@@ -63,17 +63,13 @@ class SeventyActivity : AppCompatActivity() , SeventyAdapter.onItemClickListener
 
 
 
-        myAdapter = SeventyAdapter(seventyArrayList,this)
+        myAdapter = SeventyAdapter(seventyArrayList)
 
 
 
         recyclerView.adapter = myAdapter
 
-        myAdapter.setOnItemClickListener(object : SeventyAdapter.onItemClickListener {
-            override fun onItemClick(item: Item, position: Int) {
-                TODO("Not yet implemented")
-            }
-        })
+
 
         EventChangeListener()
     }
@@ -82,30 +78,36 @@ class SeventyActivity : AppCompatActivity() , SeventyAdapter.onItemClickListener
         when (item.itemId) {
             R.id.inicio -> {
                 val mainActivity = Intent (this, MainActivity::class.java)
+                finish()
                 startActivity(mainActivity)
             }
             R.id.inventory -> {
                 val inventoryActivity = Intent (this, InventoryActivity::class.java)
+                finish()
                 startActivity(inventoryActivity)
             }
 
             R.id.qr -> {
                 val qrActivity = Intent (this, QrActivity::class.java)
+                finish()
                 startActivity(qrActivity)
             }
 
 
             R.id.comentarios -> {
                 val interactions = Intent (this, InteractionsActivity::class.java)
+                finish()
                 startActivity(interactions)
             }
             R.id.noticias -> {
                 val uri : Uri = Uri.parse("https://www.ulpgc.es/");
                 val intent : Intent = Intent(Intent.ACTION_VIEW, uri);
+                finish()
                 startActivity(intent);
             }
             R.id.ajustes -> {
                 val ajustesActivity = Intent (this, SettingsActivity::class.java)
+                finish()
                 startActivity(ajustesActivity)
             }
 
@@ -150,16 +152,4 @@ class SeventyActivity : AppCompatActivity() , SeventyAdapter.onItemClickListener
 
     }
 
-    override fun onItemClick(item: Item, position: Int) {
-        //  Toast.makeText(this, item.Name, Toast.LENGTH_LONG).show()
-
-        val intent = Intent(this, ItemActivity::class.java)
-        intent.putExtra("Name", item.Name)
-        intent.putExtra("Year", item.Year)
-        intent.putExtra("Image", item.Image)
-        intent.putExtra("Description", item.Description)
-        startActivity(intent)
-
-
-    }
 }

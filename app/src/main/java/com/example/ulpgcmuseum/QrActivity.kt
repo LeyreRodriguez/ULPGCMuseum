@@ -1,22 +1,23 @@
 package com.example.ulpgcmuseum
-
-import android.Manifest
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData
-import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.bumptech.glide.Glide
+import com.example.ulpgcmuseum.Activity.ItemActivity
+import com.example.ulpgcmuseum.Adapter.MyAdapter
+import com.google.firebase.firestore.*
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 private const val CAMERA_REQUEST_CODE = 101
@@ -24,42 +25,29 @@ private const val CAMERA_REQUEST_CODE = 101
 class QrActivity : AppCompatActivity() {
 
     private lateinit var codeScanner: CodeScanner
+    private var db : FirebaseFirestore = FirebaseFirestore.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr)
-
+        db = FirebaseFirestore.getInstance()
         setUpPermissions()
-        codeScanner()
-        dynamicLink()
-    }
+        codeScanner()   //Todo: when scanned code vibrate??
+        numberCode()
 
-    private fun dynamicLink() {
-        Firebase.dynamicLinks
-            .getDynamicLink(intent)
-            .addOnSuccessListener(this) { pendingDynamicLinkData: PendingDynamicLinkData? ->
-                // Get deep link from result (may be null if no link is found)
-                var deepLink: Uri? = null
-                if (pendingDynamicLinkData != null) {
-                    deepLink = pendingDynamicLinkData.link
-                }
 
-                // Handle the deep link. For example, open the linked
-                // content, or apply promotional credit to the user's
-                // account.
-                // ...
 
-            }
-            .addOnFailureListener(this) { e -> Log.w(TAG, "getDynamicLink:onFailure", e) }
     }
 
     private fun codeScanner(){
 
         val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
         val scannerText = findViewById<TextView>(R.id.scan_text)
-        pressButton(scannerText.text )
-        codeScanner = CodeScanner(this, scannerView)
 
+
+        codeScanner = CodeScanner(this, scannerView)
+        Toast.makeText(scannerText.context, scannerText.text.toString(), Toast.LENGTH_SHORT).show()
         codeScanner.apply {
             camera = CodeScanner.CAMERA_BACK
             formats = CodeScanner.ALL_FORMATS
@@ -71,7 +59,11 @@ class QrActivity : AppCompatActivity() {
 
             decodeCallback = DecodeCallback {
                 runOnUiThread{
-                    scannerText.text = it.text
+
+                    //scannerText.text = it.text
+                    loadItem(it.toString())
+
+
                 }
             }
 
@@ -81,25 +73,40 @@ class QrActivity : AppCompatActivity() {
                 }
             }
 
-        }
 
-        //si pones el scanCodeMode en continuos esto no es necesario.
-        //para que cada vez que clickes se escanee el qr
-        scannerView.setOnClickListener{
-            codeScanner.startPreview()
-        }
+            //si pones el scanCodeMode en continuos esto no es necesario.
+            //para que cada vez que clickes se escanee el qr
+            scannerView.setOnClickListener{
+                codeScanner.startPreview()
+            }
 
+
+
+        }
 
     }
 
-    private fun pressButton(text: CharSequence?) {
-        val link = findViewById<AppCompatButton>(R.id.link)
-        link.setOnClickListener {
-            val uri : Uri = Uri.parse(text as String?);
-            val intent : Intent = Intent(Intent.ACTION_VIEW, uri);
-            startActivity(intent);
-        }
+    private fun loadItem(text : String) {
+        val docRef = db.collection("Inventory").document(text)
 
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            var item = documentSnapshot.toObject(Item::class.java)!!
+            val intent = Intent(this, ItemActivity::class.java)
+            intent.putExtra("item", item)
+            startActivity(intent)
+        }
+    }
+
+
+    private fun numberCode(){
+        val numberCode = findViewById<EditText>(R.id.qr_number_code)
+        //get int from char code
+
+    }
+
+    private fun goToLink(link: String) {
+        val url =  Uri.parse(link)
+        startActivity(Intent(Intent.ACTION_VIEW, url))
     }
 
     override fun onResume() {

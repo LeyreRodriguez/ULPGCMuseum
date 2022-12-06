@@ -69,26 +69,34 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val seventy = findViewById<Button>(R.id.setenta)
         seventy.setOnClickListener {
             val seventyActivity = Intent(this, SeventyActivity::class.java)
+            finish()
             startActivity(seventyActivity)
+
         }
 
 
         val eighty=findViewById<Button>(R.id.ochenta)
         eighty.setOnClickListener {
             val eightyActivity = Intent(this, EightyActivity::class.java)
+            finish()
             startActivity(eightyActivity)
+
         }
 
         val ninety=findViewById<Button>(R.id.noventa)
         ninety.setOnClickListener {
             val ninetyActivity = Intent(this, NinetyActivity::class.java)
+            finish()
             startActivity(ninetyActivity)
+
         }
 
         val qrButton = findViewById<ImageView>(R.id.qrButton)
         qrButton.setOnClickListener {
             val qrActivity = Intent (this, QrActivity::class.java)
+            finish()
             startActivity(qrActivity)
+
         }
 
     }
@@ -104,21 +112,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         recyclerView.setHasFixedSize(true)
 
         itemList = arrayListOf()
-
-
-
-        myAdapter = MostVisitedAdapter(itemList,this)
-
-
-
+        myAdapter = MostVisitedAdapter(itemList)
         recyclerView.adapter = myAdapter
-
-        myAdapter.setOnItemClickListener(object : MostVisitedAdapter.onItemClickListener {
-            override fun onItemClick(item: Item, position: Int) {
-                TODO("Not yet implemented")
-
-            }
-        })
 
         EventChangeListener()
 
@@ -135,27 +130,37 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }*/
             R.id.inventory -> {
                 val inventoryActivity = Intent (this, InventoryActivity::class.java)
+                finish()
                 startActivity(inventoryActivity)
+
             }
 
             R.id.qr -> {
                 val qrActivity = Intent (this, QrActivity::class.java)
+                finish()
                 startActivity(qrActivity)
+
             }
 
 
             R.id.comentarios -> {
                 val interactions = Intent (this, InteractionsActivity::class.java)
+                finish()
                 startActivity(interactions)
+
             }
             R.id.noticias -> {
                 val uri : Uri = Uri.parse("https://www.ulpgc.es/");
                 val intent : Intent = Intent(Intent.ACTION_VIEW, uri);
+                finish()
                 startActivity(intent);
+
             }
             R.id.ajustes -> {
                 val ajustesActivity = Intent (this, SettingsActivity::class.java)
+                finish()
                 startActivity(ajustesActivity)
+
             }
 
         }
@@ -165,6 +170,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onBackPressed() {
+        Log.e("Le das", "pa tras")
         if(drawerLayout.isDrawerOpen((GravityCompat.START))){
             drawerLayout.closeDrawer(GravityCompat.START)
         } else{
@@ -175,12 +181,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun EventChangeListener(){
 
-        db = getInstance()
-        val pruebaList = arrayListOf<Item>()
+        db = FirebaseFirestore.getInstance()
 
-
-
-        db.collection("Inventory").addSnapshotListener(object : EventListener<QuerySnapshot> {
+        db.collection("Inventory").orderBy("mostVisited", Query.Direction.DESCENDING).
+        addSnapshotListener(object : EventListener<QuerySnapshot> {
             override fun onEvent(
                 value: QuerySnapshot?,
                 error: FirebaseFirestoreException?
@@ -191,19 +195,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
 
                 for (dc: DocumentChange in value?.documentChanges!!) {
-                    pruebaList.add(dc.document.toObject(Item::class.java))
-
-
+                    itemList.add(dc.document.toObject(Item::class.java))
                 }
-
-
-                for (i in pruebaList.sortedByDescending { it.mostVisited }) {
-                    itemList.add(i)
-
-                }
-
-
-
 
                 myAdapter.notifyDataSetChanged()
 
@@ -215,68 +208,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    fun onItemClick(item: Item, position: Int) {
-        //  Toast.makeText(this, item.Name, Toast.LENGTH_LONG).show()
 
-        updateItem(item)
-
-        val intent = Intent(this, ItemActivity::class.java)
-        intent.putExtra("Name", item.Name)
-        intent.putExtra("Year", item.Year)
-        intent.putExtra("Image", item.Image)
-        intent.putExtra("Description", item.Description)
-        startActivity(intent)
-
-
-    }
-
-
-    //Terminar de implementar, solo se aumenta cuando se actualiza la pagina
-    fun updateItem(item : Item) {
-
-        db = getInstance()
-
-        db.collection("Inventory").addSnapshotListener(object : EventListener<QuerySnapshot> {
-            override fun onEvent(
-                value: QuerySnapshot?,
-                error: FirebaseFirestoreException?
-            ) {
-
-                if (error != null) {
-                    Log.e("Firestore Error", error.message.toString())
-                }
-
-                for (dc: DocumentChange in value?.documentChanges!!) {
-
-                    if(dc.document.data.get("Name") == item.Name){
-
-/*
-                        var contador : Int? = item.mostVisited
-                        contador = contador?.plus(1)
-
-
-
-
-                        var hashMap : Map<String, Int> = mapOf("mostVisited" to contador) as Map<String, Int>
-
-                        db.collection("Inventory").document(dc.document.id).update(hashMap)
-                       */
-                    }
-                    myAdapter.notifyDataSetChanged()
-
-
-                }
-
-
-
-
-            }
-
-        })
-
-
-
-    }
 
 
 

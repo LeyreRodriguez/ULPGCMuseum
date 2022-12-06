@@ -6,35 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".QrActivity">
 
+
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/scanner_view"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
         app:autoFocusButtonColor="@color/purple_700"
         app:autoFocusButtonVisible="true"
         app:flashButtonColor="@color/purple_700"
         app:flashButtonVisible="true"
-        app:maskColor="#4D018786" />
+        app:maskColor="#4D018786">
 
-    <TextView
-        android:id="@+id/scan_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/scanner_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Scan something..."
-        />
+        <TextView
+            android:id="@+id/scan_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="591dp"
+            android:layout_marginEnd="266dp"
+            android:layout_marginBottom="121dp"
+            android:text="Scan something..." />
+    </com.budiyev.android.codescanner.CodeScannerView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/link"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/qr_number_code"
+        android:layout_width="244dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="155dp"
-        android:layout_marginBottom="78dp"
-        android:background="@drawable/radius_button"
-        android:text="LINK"/>
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="646dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Inserte Código"
+        android:textAlignment="center"
+        android:inputType="number" />
+
 
 </RelativeLayout>
