@@ -91,17 +91,12 @@ class InteractionsActivity : AppCompatActivity(), NavigationView.OnNavigationIte
                 val inventoryActivity = Intent (this, InventoryActivity::class.java)
                 startActivity(inventoryActivity)
             }
-            /*
+
             R.id.qr -> {
                 val qrActivity = Intent (this, QrActivity::class.java)
                 startActivity(qrActivity)
             }
-            */
 
-            R.id.comentarios -> {
-                val interactions = Intent (this, InteractionsActivity::class.java)
-                startActivity(interactions)
-            }
             R.id.noticias -> {
                 val uri : Uri = Uri.parse("https://www.ulpgc.es/");
                 val intent : Intent = Intent(Intent.ACTION_VIEW, uri);

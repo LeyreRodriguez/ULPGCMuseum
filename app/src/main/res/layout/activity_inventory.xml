@@ -59,7 +59,7 @@
                 android:background="@color/TealBlue"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                 app:navigationIcon="@drawable/ic_baseline_menu_24"
-                app:title="@string/app_name"
+                app:title="@string/toolbar_inventario"
                 app:titleTextColor="@color/white" />
 
 

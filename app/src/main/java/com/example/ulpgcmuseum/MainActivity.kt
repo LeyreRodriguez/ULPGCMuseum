@@ -181,28 +181,68 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun EventChangeListener(){
 
-        db = FirebaseFirestore.getInstance()
 
-        db.collection("Inventory").orderBy("mostVisited", Query.Direction.DESCENDING).
-        addSnapshotListener(object : EventListener<QuerySnapshot> {
-            override fun onEvent(
-                value: QuerySnapshot?,
-                error: FirebaseFirestoreException?
-            ) {
+        val configuration = resources.configuration
+        val idiomaActual = configuration.locale.language
 
-                if (error != null) {
-                    Log.e("Firestore Error", error.message.toString())
-                }
+        when(idiomaActual){
+            "es" -> {
 
-                for (dc: DocumentChange in value?.documentChanges!!) {
-                    itemList.add(dc.document.toObject(Item::class.java))
-                }
+                db = FirebaseFirestore.getInstance()
 
-                myAdapter.notifyDataSetChanged()
+                db.collection("Inventory").orderBy("mostVisited", Query.Direction.DESCENDING).
+                addSnapshotListener(object : EventListener<QuerySnapshot> {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?
+                    ) {
 
+                        if (error != null) {
+                            Log.e("Firestore Error", error.message.toString())
+                        }
+
+                        for (dc: DocumentChange in value?.documentChanges!!) {
+                            itemList.add(dc.document.toObject(Item::class.java))
+                        }
+
+                        myAdapter.notifyDataSetChanged()
+
+                    }
+
+                })
             }
+            "en" -> {
 
-        })
+                db = FirebaseFirestore.getInstance()
+
+                db.collection("InventoryEn").orderBy("mostVisited", Query.Direction.DESCENDING).
+                addSnapshotListener(object : EventListener<QuerySnapshot> {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?
+                    ) {
+
+                        if (error != null) {
+                            Log.e("Firestore Error", error.message.toString())
+                        }
+
+                        for (dc: DocumentChange in value?.documentChanges!!) {
+                            itemList.add(dc.document.toObject(Item::class.java))
+                        }
+
+                        myAdapter.notifyDataSetChanged()
+
+                    }
+
+                })
+            }
+        }
+
+
+
+
+
+
 
 
 

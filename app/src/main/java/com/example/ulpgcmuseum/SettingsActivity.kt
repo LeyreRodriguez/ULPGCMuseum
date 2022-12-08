@@ -20,10 +20,12 @@ import com.example.ulpgcmuseum.Activity.InteractionsActivity
 import com.example.ulpgcmuseum.Activity.InventoryActivity
 import com.example.ulpgcmuseum.Activity.NinetyActivity
 import com.google.android.material.navigation.NavigationView
+import java.util.*
 
 private lateinit var drawerLayout: DrawerLayout
 
 class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -70,7 +72,42 @@ class SettingsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         }
 
 
+
+        //Idioma
+
+        val idioma = findViewById<Button>(R.id.language)
+
+        idioma.setOnClickListener{
+            setLanguage();
+            finish();
+            startActivity(intent);
+        }
+
+
     }
+
+    private fun setLanguage() {
+        val metrics = resources.displayMetrics
+        val configuration = resources.configuration
+        val idiomaActual = configuration.locale.language
+
+        when(idiomaActual){
+            "es" -> {
+                //configura el idioma a ingles
+                configuration.setLocale(Locale.forLanguageTag("en"))
+            }
+            "en" -> {
+                //configura el idioma a español
+                configuration.setLocale(Locale.forLanguageTag("es"))
+            }
+        }
+
+        //actualiza el idioma, establece la configuracion
+        resources.updateConfiguration(configuration, metrics)
+        onConfigurationChanged(configuration)
+    }
+
+
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 

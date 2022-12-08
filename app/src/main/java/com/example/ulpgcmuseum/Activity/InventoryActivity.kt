@@ -116,29 +116,68 @@ class InventoryActivity : AppCompatActivity() , NavigationView.OnNavigationItemS
 
     private fun EventChangeListener(){
 
-        db = FirebaseFirestore.getInstance()
+        val configuration = resources.configuration
+        val idiomaActual = configuration.locale.language
+
+        when(idiomaActual){
+            "es" -> {
+
+                db = FirebaseFirestore.getInstance()
 
 
-        db.collection("Inventory").addSnapshotListener(object : EventListener<QuerySnapshot> {
-            override fun onEvent(
-                value: QuerySnapshot?,
-                error: FirebaseFirestoreException?
-            ) {
+                db.collection("Inventory").addSnapshotListener(object : EventListener<QuerySnapshot> {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?
+                    ) {
 
-                if (error != null) {
-                    Log.e("Firestore Error", error.message.toString())
-                }
+                        if (error != null) {
+                            Log.e("Firestore Error", error.message.toString())
+                        }
 
-                for (dc: DocumentChange in value?.documentChanges!!) {
+                        for (dc: DocumentChange in value?.documentChanges!!) {
 
-                    inventoryArrayList.add(dc.document.toObject(Item::class.java))
+                            inventoryArrayList.add(dc.document.toObject(Item::class.java))
 
-                }
-                tempArrayList.addAll(inventoryArrayList)
-                myAdapter.notifyDataSetChanged()
+                        }
+                        tempArrayList.addAll(inventoryArrayList)
+                        myAdapter.notifyDataSetChanged()
+
+                    }
+                })
 
             }
-        })
+            "en" -> {
+
+                db = FirebaseFirestore.getInstance()
+
+
+                db.collection("InventoryEn").addSnapshotListener(object : EventListener<QuerySnapshot> {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?
+                    ) {
+
+                        if (error != null) {
+                            Log.e("Firestore Error", error.message.toString())
+                        }
+
+                        for (dc: DocumentChange in value?.documentChanges!!) {
+
+                            inventoryArrayList.add(dc.document.toObject(Item::class.java))
+
+                        }
+                        tempArrayList.addAll(inventoryArrayList)
+                        myAdapter.notifyDataSetChanged()
+
+                    }
+                })
+
+            }
+        }
+
+
+
 
     }
 

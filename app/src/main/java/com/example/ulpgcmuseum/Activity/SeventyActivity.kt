@@ -119,34 +119,74 @@ class SeventyActivity : AppCompatActivity() , NavigationView.OnNavigationItemSel
 
 
     private fun EventChangeListener(){
+        val configuration = resources.configuration
+        val idiomaActual = configuration.locale.language
 
-        db = FirebaseFirestore.getInstance()
+        when(idiomaActual){
+            "es" -> {
+
+                db = FirebaseFirestore.getInstance()
 
 
 
-        db.collection("Inventory").addSnapshotListener(object : EventListener<QuerySnapshot> {
-            override fun onEvent(
-                value: QuerySnapshot?,
-                error: FirebaseFirestoreException?
-            ) {
+                db.collection("Inventory").addSnapshotListener(object : EventListener<QuerySnapshot> {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?
+                    ) {
 
-                if (error != null) {
-                    Log.e("Firestore Error", error.message.toString())
-                }
-
-                for (dc: DocumentChange in value?.documentChanges!!) {
-                    for (i in 1970..1979) {
-                        if (dc.document.data.get("Year").toString() == i.toString()){
-                            seventyArrayList.add(dc.document.toObject(Item::class.java))
+                        if (error != null) {
+                            Log.e("Firestore Error", error.message.toString())
                         }
+
+                        for (dc: DocumentChange in value?.documentChanges!!) {
+                            for (i in 1970..1979) {
+                                if (dc.document.data.get("Year").toString() == i.toString()){
+                                    seventyArrayList.add(dc.document.toObject(Item::class.java))
+                                }
+                            }
+                            myAdapter.notifyDataSetChanged()
+
+                        }
+
                     }
-                    myAdapter.notifyDataSetChanged()
 
-                }
-
+                })
             }
+            "en" -> {
 
-        })
+                db = FirebaseFirestore.getInstance()
+
+
+
+                db.collection("InventoryEn").addSnapshotListener(object : EventListener<QuerySnapshot> {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?
+                    ) {
+
+                        if (error != null) {
+                            Log.e("Firestore Error", error.message.toString())
+                        }
+
+                        for (dc: DocumentChange in value?.documentChanges!!) {
+                            for (i in 1970..1979) {
+                                if (dc.document.data.get("Year").toString() == i.toString()){
+                                    seventyArrayList.add(dc.document.toObject(Item::class.java))
+                                }
+                            }
+                            myAdapter.notifyDataSetChanged()
+
+                        }
+
+                    }
+
+                })
+            }
+        }
+
+
+
 
 
 

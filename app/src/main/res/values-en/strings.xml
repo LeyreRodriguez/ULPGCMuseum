@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="toolbar_ajustes">Settings</string>
+    <string name="toolbar_inicio">Home</string>
+    <string name="toolbar_inventario">Inventory</string>
+    <string name="toolbar_scan_qrcode">Scan qr code</string>
+    <string name="toolbar_comentarios">Comments</string>
+    <string name="toolbar_noticias">News</string>
+    <string name="modo_oscuro">Dark mode</string>
+    <string name="daltonico">Color blind mode</string>
+    <string name="sugerencias">Suggestions</string>
+    <string name="idioma">Language</string>
+    <string name="cancelar">Cancel</string>
+    <string name="aceptar">Accept</string>
+    <string name="nombre">Name</string>
+    <string name="aportacion">"Contribution: "</string>
+    <string name="por_decadas">By decades:</string>
+    <string name="mas_visitados">Most visited:</string>
+    <string name="aportacion_hint">Insert your comments here</string>
+    <string name="nombre_titulo">Name:</string>
+</resources>

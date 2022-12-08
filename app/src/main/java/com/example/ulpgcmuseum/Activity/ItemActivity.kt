@@ -57,7 +57,7 @@ class ItemActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
         val bundle : Bundle? = intent.extras
         val item : Item = bundle!!.getSerializable("item") as Item
-        Log.e("HOLA", item.toString())
+
 
         name.setText(item.Name)
         year.setText(item.Year.toString())
