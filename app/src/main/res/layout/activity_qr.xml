@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QrActivity">
+
+
+    <com.budiyev.android.codescanner.CodeScannerView
+        android:id="@+id/scanner_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        app:autoFocusButtonColor="@color/purple_700"
+        app:autoFocusButtonVisible="true"
+        app:flashButtonColor="@color/purple_700"
+        app:flashButtonVisible="true"
+        app:maskColor="#4D018786">
+
+        <TextView
+            android:id="@+id/scan_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="591dp"
+            android:layout_marginEnd="266dp"
+            android:layout_marginBottom="121dp"
+            android:text="Scan something..." />
+    </com.budiyev.android.codescanner.CodeScannerView>
+
+    <EditText
+        android:id="@+id/qr_number_code"
+        android:layout_width="244dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="646dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Inserte Código"
+        android:textAlignment="center"
+        android:inputType="number" />
+
+
+</RelativeLayout>

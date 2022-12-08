@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<group>
+
+    <item
+        android:id="@+id/inicio"
+        android:title="@string/toolbar_inicio"
+        android:icon="@drawable/ic_baseline_home_24"
+        />
+
+    <item
+        android:id="@+id/inventory"
+        android:title="@string/toolbar_inventario"
+        android:icon="@drawable/ic_baseline_inventory_24"
+        />
+
+    <item
+        android:id="@+id/qr"
+        android:title="@string/toolbar_scan_qrcode"
+        android:icon="@drawable/ic_baseline_qr_code_scanner_24"
+        />
+
+    <item
+        android:id="@+id/comentarios"
+        android:title="@string/toolbar_comentarios"
+        android:icon="@drawable/ic_baseline_comment_24"
+        >
+    </item>
+
+    <item
+        android:id="@+id/noticias"
+        android:title="@string/toolbar_noticias"
+        android:icon="@drawable/ic_baseline_newspaper_24"
+        >
+    </item>
+
+    <item
+        android:id="@+id/ajustes"
+        android:title="@string/toolbar_ajustes"
+        android:icon="@drawable/ic_baseline_settings_24"
+        >
+    </item>
+
+</group>
+
+</menu>

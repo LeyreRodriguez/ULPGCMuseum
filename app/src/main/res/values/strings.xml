@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name" translatable="false">ULPGC Museum</string>
+    <string name="navigation_open" translatable="false">Nav open</string>
+    <string name="navigation_close" translatable="false">Nav close</string>
+    <string name="title_activity_comments">CommentsActivity</string>
+
+
+    <!--Inicio-->
+    <string name="mas_visitados">Más visitados:</string>
+    <string name="por_decadas">Por décadas:</string>
+
+
+    <!--Navegation Drawer-->
+    <string name="toolbar_inicio">Inicio</string>
+    <string name="toolbar_inventario">Inventario</string>
+    <string name="toolbar_scan_qrcode">Escanear código qr</string>
+    <string name="toolbar_comentarios">Comentarios</string>
+    <string name="toolbar_noticias">Noticias</string>
+    <string name="toolbar_ajustes">Ajustes</string>
+
+
+    <!--Qr scan-->
+
+
+
+    <!--Comentarios/Interacción-->
+    <string name="nombre_titulo">Nombre: </string>
+    <string name="nombre">Nombre </string>
+    <string name="aportacion">Aportación: </string>
+    <string name="aportacion_hint">Inserte aquí su aportación</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+
+
+    <!--Ajustes-->
+    <string name="idioma">Idioma</string>
+    <string name="sugerencias">Sugerencias</string>
+    <string name="daltonico">Modo para daltonicos</string>
+    <string name="modo_oscuro">Modo oscuro</string>
+
+
+
+</resources>
