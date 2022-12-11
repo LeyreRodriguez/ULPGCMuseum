@@ -1,4 +1,4 @@
-package com.example.ulpgcmuseum
+package com.example.ulpgcmuseum.Activity
 
 import android.content.Intent
 import android.net.Uri
@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.ulpgcmuseum.Activity.InteractionsActivity
 import com.example.ulpgcmuseum.Activity.InventoryActivity
 import com.example.ulpgcmuseum.Activity.NinetyActivity
+import com.example.ulpgcmuseum.R
 import com.google.android.material.navigation.NavigationView
 
 private lateinit var drawerLayout: DrawerLayout

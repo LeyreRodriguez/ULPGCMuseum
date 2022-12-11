@@ -1,6 +1,10 @@
+<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/QrActivity.kt
 package com.example.ulpgcmuseum
 
 import android.Manifest
+=======
+package com.example.ulpgcmuseum.Activity
+>>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/QrActivity.kt
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -14,6 +18,17 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
+<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/QrActivity.kt
+=======
+import com.bumptech.glide.Glide
+import com.example.ulpgcmuseum.Activity.ItemActivity
+import com.example.ulpgcmuseum.Adapter.MyAdapter
+import com.example.ulpgcmuseum.Item
+import com.example.ulpgcmuseum.R
+import com.google.firebase.firestore.*
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+>>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/QrActivity.kt
 
 private const val CAMERA_REQUEST_CODE = 101
 

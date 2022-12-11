@@ -8,8 +8,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+<<<<<<< Updated upstream
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
+=======
+import androidx.appcompat.widget.SearchView
+>>>>>>> Stashed changes
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager

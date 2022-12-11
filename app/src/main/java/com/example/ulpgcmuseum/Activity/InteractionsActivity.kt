@@ -5,23 +5,15 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.ulpgcmuseum.*
-import com.example.ulpgcmuseum.Adapter.MostVisitedAdapter
 import com.example.ulpgcmuseum.R
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.*
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 class InteractionsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 

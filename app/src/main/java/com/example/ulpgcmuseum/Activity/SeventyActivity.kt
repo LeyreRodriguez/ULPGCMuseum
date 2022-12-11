@@ -7,9 +7,14 @@ import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+<<<<<<< Updated upstream
 import com.example.ulpgcmuseum.Adapter.EightyAdapter
 import com.example.ulpgcmuseum.Adapter.SeventyAdapter
 import com.example.ulpgcmuseum.Item
+=======
+import com.example.ulpgcmuseum.*
+import com.example.ulpgcmuseum.Adapter.AgeAdapter
+>>>>>>> Stashed changes
 import com.example.ulpgcmuseum.R
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
@@ -18,8 +23,13 @@ import com.google.firebase.ktx.Firebase
 class SeventyActivity : AppCompatActivity() , SeventyAdapter.onItemClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var seventyArrayList : ArrayList<Item>
+<<<<<<< Updated upstream
 
     private lateinit var myAdapter: SeventyAdapter
+=======
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var myAdapter: AgeAdapter
+>>>>>>> Stashed changes
 
     private var db = Firebase.firestore
 
@@ -37,15 +47,62 @@ class SeventyActivity : AppCompatActivity() , SeventyAdapter.onItemClickListener
 
 
 
+<<<<<<< Updated upstream
         myAdapter = SeventyAdapter(seventyArrayList,this)
+=======
+        myAdapter = AgeAdapter(seventyArrayList)
+>>>>>>> Stashed changes
 
 
 
         recyclerView.adapter = myAdapter
 
+<<<<<<< Updated upstream
         myAdapter.setOnItemClickListener(object : SeventyAdapter.onItemClickListener {
             override fun onItemClick(item: Item, position: Int) {
                 TODO("Not yet implemented")
+=======
+
+
+        EventChangeListener()
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.inicio -> {
+                val mainActivity = Intent (this, MainActivity::class.java)
+
+                startActivity(mainActivity)
+            }
+            R.id.inventory -> {
+                val inventoryActivity = Intent (this, InventoryActivity::class.java)
+
+                startActivity(inventoryActivity)
+            }
+
+            R.id.qr -> {
+                val qrActivity = Intent (this, QrActivity::class.java)
+
+                startActivity(qrActivity)
+            }
+
+
+            R.id.comentarios -> {
+                val interactions = Intent (this, InteractionsActivity::class.java)
+
+                startActivity(interactions)
+            }
+            R.id.noticias -> {
+                val uri : Uri = Uri.parse("https://www.ulpgc.es/");
+                val intent : Intent = Intent(Intent.ACTION_VIEW, uri);
+
+                startActivity(intent);
+            }
+            R.id.ajustes -> {
+                val ajustesActivity = Intent (this, SettingsActivity::class.java)
+
+                startActivity(ajustesActivity)
+>>>>>>> Stashed changes
             }
         })
 

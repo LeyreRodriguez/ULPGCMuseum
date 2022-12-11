@@ -1,4 +1,4 @@
-package com.example.ulpgcmuseum
+package com.example.ulpgcmuseum.Activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -14,6 +14,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/MainActivity.kt
 import com.example.ulpgcmuseum.Activity.*
 import com.example.ulpgcmuseum.Activity.InventoryActivity
 import com.example.ulpgcmuseum.Adapter.EightyAdapter
@@ -24,6 +25,17 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+=======
+import com.example.ulpgcmuseum.Adapter.MostVisitedAdapter
+import com.example.ulpgcmuseum.Item
+import com.example.ulpgcmuseum.R
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlin.collections.ArrayList
+>>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/MainActivity.kt
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
 
@@ -60,7 +72,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView.getHeaderView(0)
         navigationView.bringToFront()
 
-        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_open, R.string.navigation_close)
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
+            R.string.navigation_open,
+            R.string.navigation_close
+        )
 
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -72,6 +87,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val seventy = findViewById<Button>(R.id.setenta)
         seventy.setOnClickListener {
             val seventyActivity = Intent(this, SeventyActivity::class.java)
+<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/MainActivity.kt
+=======
+
+>>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/MainActivity.kt
             startActivity(seventyActivity)
         }
 
@@ -79,18 +98,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val eighty=findViewById<Button>(R.id.ochenta)
         eighty.setOnClickListener {
             val eightyActivity = Intent(this, EightyActivity::class.java)
+<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/MainActivity.kt
+=======
+
+>>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/MainActivity.kt
             startActivity(eightyActivity)
         }
 
         val ninety=findViewById<Button>(R.id.noventa)
         ninety.setOnClickListener {
             val ninetyActivity = Intent(this, NinetyActivity::class.java)
+<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/MainActivity.kt
+=======
+
+>>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/MainActivity.kt
             startActivity(ninetyActivity)
         }
 
         val qrButton = findViewById<ImageView>(R.id.qrButton)
         qrButton.setOnClickListener {
             val qrActivity = Intent (this, QrActivity::class.java)
+<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/MainActivity.kt
+=======
+
+>>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/MainActivity.kt
             startActivity(qrActivity)
         }
 
@@ -135,23 +166,43 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }*/
             R.id.inventory -> {
                 val inventoryActivity = Intent (this, InventoryActivity::class.java)
+<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/MainActivity.kt
+=======
+
+>>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/MainActivity.kt
                 startActivity(inventoryActivity)
             }
             R.id.qr -> {
                 val qrActivity = Intent (this, QrActivity::class.java)
+<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/MainActivity.kt
+=======
+
+>>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/MainActivity.kt
                 startActivity(qrActivity)
             }
             R.id.comentarios -> {
                 val interactions = Intent (this, InteractionsActivity::class.java)
+<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/MainActivity.kt
+=======
+
+>>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/MainActivity.kt
                 startActivity(interactions)
             }
             R.id.noticias -> {
                 val uri : Uri = Uri.parse("https://www.ulpgc.es/");
                 val intent : Intent = Intent(Intent.ACTION_VIEW, uri);
+<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/MainActivity.kt
+=======
+
+>>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/MainActivity.kt
                 startActivity(intent);
             }
             R.id.ajustes -> {
                 val ajustesActivity = Intent (this, SettingsActivity::class.java)
+<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/MainActivity.kt
+=======
+
+>>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/MainActivity.kt
                 startActivity(ajustesActivity)
             }
 
