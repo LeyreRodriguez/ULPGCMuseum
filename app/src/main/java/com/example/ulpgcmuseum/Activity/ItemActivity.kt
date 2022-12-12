@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,10 +14,6 @@ import com.bumptech.glide.Glide
 import com.example.ulpgcmuseum.*
 import com.example.ulpgcmuseum.R
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.firestore.*
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import de.hdodenhof.circleimageview.CircleImageView
 
 
 class ItemActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener  {
@@ -77,36 +72,36 @@ class ItemActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         when (item.itemId) {
             R.id.inicio -> {
                 val mainActivity = Intent (this, MainActivity::class.java)
-                finish()
+
                 startActivity(mainActivity)
             }
             R.id.inventory -> {
                 val inventoryActivity = Intent (this, InventoryActivity::class.java)
-                finish()
+
                 startActivity(inventoryActivity)
             }
 
             R.id.qr -> {
                 val qrActivity = Intent (this, QrActivity::class.java)
-                finish()
+
                 startActivity(qrActivity)
             }
 
 
             R.id.comentarios -> {
                 val interactions = Intent (this, InteractionsActivity::class.java)
-                finish()
+
                 startActivity(interactions)
             }
             R.id.noticias -> {
                 val uri : Uri = Uri.parse("https://www.ulpgc.es/");
                 val intent : Intent = Intent(Intent.ACTION_VIEW, uri);
-                finish()
+
                 startActivity(intent);
             }
             R.id.ajustes -> {
                 val ajustesActivity = Intent (this, SettingsActivity::class.java)
-                finish()
+
                 startActivity(ajustesActivity)
             }
         }

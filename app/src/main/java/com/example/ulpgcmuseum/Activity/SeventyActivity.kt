@@ -13,9 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulpgcmuseum.*
-import com.example.ulpgcmuseum.Adapter.EightyAdapter
-import com.example.ulpgcmuseum.Adapter.NinetyAdapter
-import com.example.ulpgcmuseum.Adapter.SeventyAdapter
+import com.example.ulpgcmuseum.Adapter.AgeAdapter
 import com.example.ulpgcmuseum.R
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.*
@@ -26,7 +24,7 @@ class SeventyActivity : AppCompatActivity() , NavigationView.OnNavigationItemSel
     private lateinit var recyclerView: RecyclerView
     private lateinit var seventyArrayList : ArrayList<Item>
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var myAdapter: SeventyAdapter
+    private lateinit var myAdapter: AgeAdapter
 
     private var db = Firebase.firestore
 
@@ -63,7 +61,7 @@ class SeventyActivity : AppCompatActivity() , NavigationView.OnNavigationItemSel
 
 
 
-        myAdapter = SeventyAdapter(seventyArrayList)
+        myAdapter = AgeAdapter(seventyArrayList)
 
 
 
@@ -78,36 +76,36 @@ class SeventyActivity : AppCompatActivity() , NavigationView.OnNavigationItemSel
         when (item.itemId) {
             R.id.inicio -> {
                 val mainActivity = Intent (this, MainActivity::class.java)
-                finish()
+
                 startActivity(mainActivity)
             }
             R.id.inventory -> {
                 val inventoryActivity = Intent (this, InventoryActivity::class.java)
-                finish()
+
                 startActivity(inventoryActivity)
             }
 
             R.id.qr -> {
                 val qrActivity = Intent (this, QrActivity::class.java)
-                finish()
+
                 startActivity(qrActivity)
             }
 
 
             R.id.comentarios -> {
                 val interactions = Intent (this, InteractionsActivity::class.java)
-                finish()
+
                 startActivity(interactions)
             }
             R.id.noticias -> {
                 val uri : Uri = Uri.parse("https://www.ulpgc.es/");
                 val intent : Intent = Intent(Intent.ACTION_VIEW, uri);
-                finish()
+
                 startActivity(intent);
             }
             R.id.ajustes -> {
                 val ajustesActivity = Intent (this, SettingsActivity::class.java)
-                finish()
+
                 startActivity(ajustesActivity)
             }
 
