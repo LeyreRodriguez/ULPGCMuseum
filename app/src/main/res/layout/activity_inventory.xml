@@ -40,14 +40,14 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/inventoryList"
                 android:layout_width="wrap_content"
-                android:layout_height="611dp"
+                android:layout_height="608dp"
 
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="26dp"
-                android:layout_marginTop="72dp"
+                android:layout_marginTop="76dp"
                 android:layout_marginEnd="28dp"
                 android:layout_marginBottom="48dp"
                 tools:listitem="@layout/inventory_item" />
@@ -59,7 +59,7 @@
                 android:background="@color/TealBlue"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                 app:navigationIcon="@drawable/ic_baseline_menu_24"
-                app:title="@string/app_name"
+                app:title="@string/toolbar_inventario"
                 app:titleTextColor="@color/white" />
 
 

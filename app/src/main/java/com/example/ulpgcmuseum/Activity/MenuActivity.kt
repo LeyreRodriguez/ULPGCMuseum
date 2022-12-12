@@ -7,11 +7,7 @@ import android.content.Intent
 import android.widget.Button
 import android.widget.ImageButton
 
-<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/MenuActivity.kt
-import android.widget.TextView
-=======
 import com.example.ulpgcmuseum.R
->>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/MenuActivity.kt
 
 class MenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

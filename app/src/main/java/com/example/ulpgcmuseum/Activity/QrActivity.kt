@@ -1,16 +1,11 @@
-<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/QrActivity.kt
-package com.example.ulpgcmuseum
-
-import android.Manifest
-=======
 package com.example.ulpgcmuseum.Activity
->>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/QrActivity.kt
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -18,8 +13,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
-<<<<<<< Updated upstream:app/src/main/java/com/example/ulpgcmuseum/QrActivity.kt
-=======
 import com.bumptech.glide.Glide
 import com.example.ulpgcmuseum.Activity.ItemActivity
 import com.example.ulpgcmuseum.Adapter.MyAdapter
@@ -28,31 +21,35 @@ import com.example.ulpgcmuseum.R
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
->>>>>>> Stashed changes:app/src/main/java/com/example/ulpgcmuseum/Activity/QrActivity.kt
 
 private const val CAMERA_REQUEST_CODE = 101
 
 class QrActivity : AppCompatActivity() {
 
     private lateinit var codeScanner: CodeScanner
+    private var db : FirebaseFirestore = FirebaseFirestore.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr)
-
+        db = FirebaseFirestore.getInstance()
         setUpPermissions()
         codeScanner()   //Todo: when scanned code vibrate??
         numberCode()
+
+
+
     }
 
     private fun codeScanner(){
 
         val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
         val scannerText = findViewById<TextView>(R.id.scan_text)
-        val qrScanner = findViewById<Button>(R.id.qr_scan_button)
+
 
         codeScanner = CodeScanner(this, scannerView)
-
+        Toast.makeText(scannerText.context, scannerText.text.toString(), Toast.LENGTH_SHORT).show()
         codeScanner.apply {
             camera = CodeScanner.CAMERA_BACK
             formats = CodeScanner.ALL_FORMATS
@@ -64,7 +61,11 @@ class QrActivity : AppCompatActivity() {
 
             decodeCallback = DecodeCallback {
                 runOnUiThread{
-                    scannerText.text = it.text
+
+                    //scannerText.text = it.text
+                    loadItem(it.toString())
+
+
                 }
             }
 
@@ -81,16 +82,21 @@ class QrActivity : AppCompatActivity() {
                 codeScanner.startPreview()
             }
 
-            qrScanner.setOnClickListener{
-                codeScanner.startPreview()
-            }
 
-            scannerText.setOnClickListener {
-                goToLink(scannerText.text.toString())
-            }
 
         }
 
+    }
+
+    private fun loadItem(text : String) {
+        val docRef = db.collection("Inventory").document(text)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            var item = documentSnapshot.toObject(Item::class.java)!!
+            val intent = Intent(this, ItemActivity::class.java)
+            intent.putExtra("item", item)
+            startActivity(intent)
+        }
     }
 
 

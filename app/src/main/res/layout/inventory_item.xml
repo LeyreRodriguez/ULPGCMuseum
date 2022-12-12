@@ -12,14 +12,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/tvImage"
+            android:layout_width="74dp"
+            android:layout_height="67dp"
             android:scaleType="centerCrop"
-            tools:background="@tools:sample/backgrounds/scenic"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toEndOf="parent"
+            cardView:layout_constraintHorizontal_bias="0.049"
             cardView:layout_constraintStart_toStartOf="parent"
-            cardView:layout_constraintTop_toTopOf="parent"/>
+            cardView:layout_constraintTop_toTopOf="parent"
+            cardView:layout_constraintVertical_bias="0.521"
+            tools:background="@tools:sample/backgrounds/scenic" />
 
         <TextView
             android:id="@+id/tvItem"
@@ -36,20 +41,21 @@
             android:textStyle="bold"
             tools:text="@tools:sample/full_names"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@android:color/black" />
+             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvYear"
-            android:layout_width="247dp"
-            android:layout_height="23dp"
+            android:layout_width="86dp"
+            android:layout_height="26dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+
             cardView:layout_constraintBottom_toBottomOf="parent"
             cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintHorizontal_bias="0.77"
+            cardView:layout_constraintHorizontal_bias="0.498"
             cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toBottomOf="@id/tvItem"
+
             cardView:layout_constraintVertical_bias="1.0"
             tools:text="Rating : 9.5" />
 

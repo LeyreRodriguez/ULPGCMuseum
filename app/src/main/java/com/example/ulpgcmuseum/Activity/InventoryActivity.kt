@@ -6,31 +6,31 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
-<<<<<<< Updated upstream
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
-=======
 import androidx.appcompat.widget.SearchView
->>>>>>> Stashed changes
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulpgcmuseum.*
 import com.example.ulpgcmuseum.Adapter.MyAdapter
+
 import com.example.ulpgcmuseum.R
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.ArrayList
 
-class InventoryActivity : AppCompatActivity() , MyAdapter.onItemClickListener, NavigationView.OnNavigationItemSelectedListener{
+class InventoryActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener{
     private lateinit var recyclerView: RecyclerView
     private lateinit var inventoryArrayList : ArrayList<Item>
     private lateinit var drawerLayout: DrawerLayout
-
+    private lateinit var tempArrayList: ArrayList<Item>
     private lateinit var myAdapter: MyAdapter
 
     private var db = Firebase.firestore
@@ -46,20 +46,14 @@ class InventoryActivity : AppCompatActivity() , MyAdapter.onItemClickListener, N
         recyclerView.setHasFixedSize(true)
 
         inventoryArrayList = arrayListOf()
+        tempArrayList = arrayListOf()
 
-
-
-        myAdapter = MyAdapter(inventoryArrayList,this)
-
+        myAdapter = MyAdapter(tempArrayList)
 
 
         recyclerView.adapter = myAdapter
 
-        myAdapter.setOnItemClickListener(object : MyAdapter.onItemClickListener {
-            override fun onItemClick(item: Item, position: Int) {
-                TODO("Not yet implemented")
-            }
-        })
+
 
         EventChangeListener()
 
@@ -69,7 +63,7 @@ class InventoryActivity : AppCompatActivity() , MyAdapter.onItemClickListener, N
 
         setSupportActionBar(toolbar)
 
-        val menu = navigationView.menu
+        //val menu = navigationView.menu
         navigationView.getHeaderView(0)
         navigationView.bringToFront()
 
@@ -78,56 +72,113 @@ class InventoryActivity : AppCompatActivity() , MyAdapter.onItemClickListener, N
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener (this)
-
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
-    private fun EventChangeListener(){
+        menuInflater.inflate(R.menu.nav_header_search, menu)
+        val item = menu?.findItem(R.id.search_action)
+        val searchView = item?.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                TODO("Not yet implemented")
+            }
 
-        db = FirebaseFirestore.getInstance()
+            override fun onQueryTextChange(newText: String?): Boolean {
+                tempArrayList.clear()
+                val searchText = newText!!.toLowerCase(Locale.getDefault())
+                if(searchText.isNotEmpty()){
+                    inventoryArrayList.forEach {
 
+                        if (it.Name?.toLowerCase(Locale.getDefault())?.contains(searchText) == true){
+                            tempArrayList.add(it)
+                        }
+                    }
 
+                    recyclerView.adapter!!.notifyDataSetChanged()
+                }else{
 
-        db.collection("Inventory").addSnapshotListener(object : EventListener<QuerySnapshot> {
-            override fun onEvent(
-                value: QuerySnapshot?,
-                error: FirebaseFirestoreException?
-            ) {
-
-                if (error != null) {
-                    Log.e("Firestore Error", error.message.toString())
+                    tempArrayList.clear()
+                    tempArrayList.addAll(inventoryArrayList)
+                    recyclerView.adapter!!.notifyDataSetChanged()
                 }
-
-                for (dc: DocumentChange in value?.documentChanges!!) {
-
-
-                            inventoryArrayList.add(dc.document.toObject(Item::class.java))
-
-
-                    myAdapter.notifyDataSetChanged()
-
-                }
-
+                return false
             }
 
         })
 
+        return super.onCreateOptionsMenu(menu)
+    }
+
+
+
+    private fun EventChangeListener(){
+
+        val configuration = resources.configuration
+        val idiomaActual = configuration.locale.language
+
+        when(idiomaActual){
+            "es" -> {
+
+                db = FirebaseFirestore.getInstance()
+
+
+                db.collection("Inventory").addSnapshotListener(object : EventListener<QuerySnapshot> {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?
+                    ) {
+
+                        if (error != null) {
+                            Log.e("Firestore Error", error.message.toString())
+                        }
+
+                        for (dc: DocumentChange in value?.documentChanges!!) {
+
+                            inventoryArrayList.add(dc.document.toObject(Item::class.java))
+
+                        }
+                        tempArrayList.addAll(inventoryArrayList)
+                        myAdapter.notifyDataSetChanged()
+
+                    }
+                })
+
+            }
+            "en" -> {
+
+                db = FirebaseFirestore.getInstance()
+
+
+                db.collection("InventoryEn").addSnapshotListener(object : EventListener<QuerySnapshot> {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?
+                    ) {
+
+                        if (error != null) {
+                            Log.e("Firestore Error", error.message.toString())
+                        }
+
+                        for (dc: DocumentChange in value?.documentChanges!!) {
+
+                            inventoryArrayList.add(dc.document.toObject(Item::class.java))
+
+                        }
+                        tempArrayList.addAll(inventoryArrayList)
+                        myAdapter.notifyDataSetChanged()
+
+                    }
+                })
+
+            }
+        }
+
+
 
 
     }
 
-    override fun onItemClick(item: Item, position: Int) {
-        //  Toast.makeText(this, item.Name, Toast.LENGTH_LONG).show()
-
-        val intent = Intent(this, ItemActivity::class.java)
-        intent.putExtra("Name", item.Name)
-        intent.putExtra("Year", item.Year)
-        intent.putExtra("Image", item.Image)
-        intent.putExtra("Description", item.Description)
-        startActivity(intent)
-
-
-    }
 
 
 
@@ -138,7 +189,6 @@ class InventoryActivity : AppCompatActivity() , MyAdapter.onItemClickListener, N
         } else{
             super.onBackPressed()
         }
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -147,32 +197,23 @@ class InventoryActivity : AppCompatActivity() , MyAdapter.onItemClickListener, N
                 val mainActivity = Intent (this, MainActivity::class.java)
                 startActivity(mainActivity)
             }
-            /*
-            R.id.inventory -> {
-                val inventoryActivity = Intent (this, InventoryActivity::class.java)
-                ContextCompat.startActivity(createContext(inv))
-            }
-
             R.id.qr -> {
                 val qrActivity = Intent (this, QrActivity::class.java)
-                ContextCompat.startActivity(qrActivity)
+                startActivity(qrActivity)
             }
             R.id.comentarios -> {
                 val interactions = Intent (this, InteractionsActivity::class.java)
-                ContextCompat.startActivity(interactions)
+                startActivity(interactions)
             }
             R.id.noticias -> {
                 val uri : Uri = Uri.parse("https://www.ulpgc.es/");
                 val intent : Intent = Intent(Intent.ACTION_VIEW, uri);
-                ContextCompat.startActivity(intent);
+                startActivity(intent);
             }
             R.id.ajustes -> {
                 val ajustesActivity = Intent (this, SettingsActivity::class.java)
-                ContextCompat.startActivity(ajustesActivity)
+                startActivity(ajustesActivity)
             }
-            */
-
-
         }
 
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -180,6 +221,3 @@ class InventoryActivity : AppCompatActivity() , MyAdapter.onItemClickListener, N
     }
 
 }
-
-
-

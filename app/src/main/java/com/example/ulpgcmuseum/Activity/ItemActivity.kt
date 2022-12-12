@@ -1,34 +1,73 @@
 package com.example.ulpgcmuseum.Activity
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-<<<<<<< Updated upstream
-=======
 import android.view.MenuItem
->>>>>>> Stashed changes
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.bumptech.glide.Glide
+import com.example.ulpgcmuseum.*
 import com.example.ulpgcmuseum.R
-<<<<<<< Updated upstream
-=======
 import com.google.android.material.navigation.NavigationView
->>>>>>> Stashed changes
 
 
-class ItemActivity : AppCompatActivity() {
+class ItemActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener  {
+    private lateinit var item: Item
+    private lateinit var name : TextView
+    private lateinit var image : ImageView
+    private lateinit var year : TextView
+    private lateinit var description : TextView
+    private lateinit var drawerLayout: DrawerLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item)
-        getIncomingIntent()
+        initViews()
+        initValues()
+
+        drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar_id)
+
+        setSupportActionBar(toolbar)
+
+        //val menu = navigationView.menu
+        navigationView.getHeaderView(0)
+        navigationView.bringToFront()
+
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_open, R.string.navigation_close)
+
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+        navigationView.setNavigationItemSelectedListener (this)
+    }
+
+    private fun initValues() {
+
+        val bundle : Bundle? = intent.extras
+        val item : Item = bundle!!.getSerializable("item") as Item
+
+
+        name.setText(item.Name)
+        year.setText(item.Year.toString())
+        description.setText(item.Description)
+        Glide.with(this).asBitmap().load(item.Image).into(image)
+    }
+
+    private fun initViews() {
+        name = findViewById(R.id.tvName)
+        image = findViewById(R.id.tvImage)
+        year = findViewById(R.id.tvYear)
+        description = findViewById(R.id.tvDescription)
 
     }
 
-<<<<<<< Updated upstream
-    private fun getIncomingIntent(){
-=======
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.inicio -> {
@@ -47,18 +86,8 @@ class ItemActivity : AppCompatActivity() {
 
                 startActivity(qrActivity)
             }
->>>>>>> Stashed changes
 
-        if(intent.hasExtra("Name")){
 
-<<<<<<< Updated upstream
-            var texto : String? = intent.getStringExtra("Name")
-            var imageUrl : String? = intent.getStringExtra("Image")
-            var year : Int? = intent.getIntExtra("Year",0)
-            var description : String? = intent.getStringExtra("Description")
-            if (year != null) {
-                setText(texto.toString(), imageUrl.toString(), year.toInt(), description.toString())
-=======
             R.id.comentarios -> {
                 val interactions = Intent (this, InteractionsActivity::class.java)
 
@@ -74,23 +103,14 @@ class ItemActivity : AppCompatActivity() {
                 val ajustesActivity = Intent (this, SettingsActivity::class.java)
 
                 startActivity(ajustesActivity)
->>>>>>> Stashed changes
             }
         }
 
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
     }
 
-    private fun setText(texto: String, Image: String, Year: Int, Description: String){
-        val name : TextView = findViewById(R.id.tvName)
-        val image : ImageView = findViewById(R.id.tvImage)
-        val year : TextView = findViewById(R.id.tvYear)
-        val description : TextView = findViewById(R.id.tvDescription)
-        name.setText(texto)
-        year.setText(Year.toString())
-        description.setText(Description)
 
-
-        Glide.with(this).asBitmap().load(Image).into(image)
-
-    }
 }
+
+//

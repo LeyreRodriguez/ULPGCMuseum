@@ -13,11 +13,13 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.ulpgcmuseum.*
 import com.example.ulpgcmuseum.R
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.*
 
 class InteractionsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var db : FirebaseFirestore
 
 
     @SuppressLint("WrongViewCast", "MissingInflatedId")
@@ -26,9 +28,17 @@ class InteractionsActivity : AppCompatActivity(), NavigationView.OnNavigationIte
         setContentView(R.layout.activity_interactions)
 
         val accept = findViewById<AppCompatButton>(R.id.accept)
+        val name = findViewById<TextInputEditText>(R.id.name)
+        val comment = findViewById<TextInputEditText>(R.id.comment)
+
+        db = FirebaseFirestore.getInstance()
         accept.setOnClickListener {
-            val interactionsActivity = Intent (this, InteractionsActivity::class.java)
-            startActivity(interactionsActivity)
+            // Add a new document with a generated ID
+            db.collection("Comments")
+                .document(Math.random().toString()).set(hashMapOf("Name" to name.text.toString(),
+                "Comment" to comment.text.toString()))
+            name.setText("")
+            comment.setText("")
         }
         val cancel = findViewById<AppCompatButton>(R.id.cancel)
         cancel.setOnClickListener {
@@ -60,7 +70,8 @@ class InteractionsActivity : AppCompatActivity(), NavigationView.OnNavigationIte
 
 
 
-     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
             R.id.inicio -> {
@@ -71,14 +82,12 @@ class InteractionsActivity : AppCompatActivity(), NavigationView.OnNavigationIte
                 val inventoryActivity = Intent (this, InventoryActivity::class.java)
                 startActivity(inventoryActivity)
             }
+
             R.id.qr -> {
                 val qrActivity = Intent (this, QrActivity::class.java)
                 startActivity(qrActivity)
             }
-            R.id.comentarios -> {
-                val interactions = Intent (this, InteractionsActivity::class.java)
-                startActivity(interactions)
-            }
+
             R.id.noticias -> {
                 val uri : Uri = Uri.parse("https://www.ulpgc.es/");
                 val intent : Intent = Intent(Intent.ACTION_VIEW, uri);

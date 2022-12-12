@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "806805390263",
+    "project_id": "ulpgc-museum-b4c3b",
+    "storage_bucket": "ulpgc-museum-b4c3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806805390263:android:b87f3206d777cbbffdde32",
+        "android_client_info": {
+          "package_name": "com.example.ulpgcmuseum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806805390263-en407ql4mcbji17ofh5m11275u03kkoe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIe_S10LjnqECPNfPhJ4rLh03ZY0YNMP0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806805390263-en407ql4mcbji17ofh5m11275u03kkoe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
